@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C&S - Governança Corporativa Integrada</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    h1 {
+      text-align: center;
+      color: #003366;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #003366;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 5px;
+    }
+    .question p {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 10px;
+      background-color: #e6e6e6;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .options label:hover {
+      background-color: #d4d4d4;
+    }
+    .options input[type="radio"] {
+      margin-right: 10px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background-color: #003366;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #002244;
+    }
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #e6f2ff;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #003366;
+      display: none;
+    }
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>C&S - Governança Corporativa Integrada</h1>
+    <h2>Auto Diagnóstico para Empresas Familiares</h2>
+    <p>Responda às perguntas abaixo para avaliar o grau de maturidade da sua empresa em governança corporativa.</p>
+
+    <form id="diagnosticForm">
+      <!-- Perguntas -->
+      <div class="question">
+        <p>1. Como a empresa lida com a sucessão familiar?</p>
+        <div class="options">
+          <label><input type="radio" name="q1" value="1"> Não há planejamento formal para sucessão.</label>
+          <label><input type="radio" name="q1" value="2"> Existe uma discussão informal, mas sem documentação ou cronograma.</label>
+          <label><input type="radio" name="q1" value="3"> Há um plano de sucessão documentado, mas ainda não foi totalmente implementado.</label>
+          <label><input type="radio" name="q1" value="4"> A empresa possui um plano de sucessão formal, com cronograma e envolvimento de profissionais externos.</label>
+        </div>
+      </div>
+
+      <!-- Repetindo estrutura para outras perguntas -->
+      <div class="question">
+        <p>2. Qual é o nível de profissionalização da gestão?</p>
+        <div class="options">
+          <label><input type="radio" name="q2" value="1"> A gestão é totalmente familiar, sem participação de profissionais externos.</label>
+          <label><input type="radio" name="q2" value="2"> Algumas áreas são geridas por profissionais contratados, mas a maioria é familiar.</label>
+          <label><input type="radio" name="q2" value="3"> A gestão é mista, com profissionais externos em posições-chave e familiares em cargos estratégicos.</label>
+          <label><input type="radio" name="q2" value="4"> A gestão é totalmente profissionalizada, com critérios claros de meritocracia.</label>
+        </div>
+      </div>
+
+      <!-- Mais perguntas podem ser adicionadas aqui -->
+
+      <button type="button" onclick="calculateResult()">Calcular Resultado</button>
+    </form>
+
+    <div class="result" id="result"></div>
+
+    <footer>
+      <p>&copy; 2025 C&S, Governança Corporativa Integrada. Todos os direitos reservados.</p>
+    </footer>
+  </div>
+
+  <script>
+    function calculateResult() {
+      const questions = document.querySelectorAll('.question');
+      let totalScore = 0;
+      let answeredQuestions = 0;
+
+      questions.forEach((question) => {
+        const selectedOption = question.querySelector('input[type="radio"]:checked');
+        if (selectedOption) {
+          totalScore += parseInt(selectedOption.value);
+          answeredQuestions++;
+        }
+      });
+
+      let resultText = '';
+      if (answeredQuestions < questions.length) {
+        resultText = 'Por favor, responda todas as perguntas.';
+      } else if (totalScore >= 10 && totalScore <= 20) {
+        resultText = 'Emergente: A empresa está no estágio inicial de governança corporativa.';
+      } else if (totalScore >= 21 && totalScore <= 30) {
+        resultText = 'Em Desenvolvimento: A empresa já possui algumas práticas de governança, mas ainda há espaço para melhorias.';
+      } else if (totalScore >= 31 && totalScore <= 39) {
+        resultText = 'Intermediária: A empresa está em um estágio intermediário, com boa estrutura de governança.';
+      } else {
+        resultText = 'Avançada: A empresa possui uma governança corporativa robusta.';
+      }
+
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerText = resultText;
+      resultDiv.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
